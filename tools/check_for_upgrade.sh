@@ -19,15 +19,10 @@ then
   epoch_diff=$(($(_current_epoch) - $LAST_EPOCH))
   if [ $epoch_diff -gt 6 ]
   then
-    echo "[Oh My Zsh] Would you like to check for updates?"
-    echo "Type Y to update oh-my-zsh: \c"
-    read line
-    if [ "$line" = Y ] || [ "$line" = y ]
-    then
-      /bin/sh $ZSH/tools/upgrade.sh
-      # update the zsh file
-      _update_zsh_update
-    fi
+    echo "[Oh My Zsh] Checking for updates..."
+    /bin/sh $ZSH/tools/upgrade.sh
+    # update the zsh file
+    _update_zsh_update
   fi
 else
   # create the zsh file
