@@ -13,16 +13,19 @@ then
   . ~/.zsh-update
 
   if [[ -z "$LAST_EPOCH" ]]; then
+    # fix corrupted zsh file
     _update_zsh_update && return 0;
   fi
 
   epoch_diff=$(($(_current_epoch) - $LAST_EPOCH))
   if [ $epoch_diff -gt 6 ]
   then
-    echo "[Oh My Zsh] Checking for updates..."
     /bin/sh $ZSH/tools/upgrade.sh
-    # update the zsh file
-    _update_zsh_update
+    if [ $? -eq 0 ]
+    then
+        # update the zsh file
+        _update_zsh_update
+    fi
   fi
 else
   # create the zsh file
